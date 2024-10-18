@@ -48,9 +48,9 @@ function OnAddinLoad(ribbonUI) {
     }
     
     // Exit the proxy server when the application quits.
-    Application.ApiEvent.AddApiEventListener("ApplicationQuit", () => {
-        postRequestXHR('http://127.0.0.1:21931/stopproxy', null);
-    });
+    // Application.ApiEvent.AddApiEventListener("ApplicationQuit", () => {
+    //     postRequestXHR('http://127.0.0.1:21931/stopproxy', null);
+    // });
     
     return true;
 }

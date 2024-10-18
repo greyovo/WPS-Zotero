@@ -58,7 +58,7 @@ XML_PATHS = {
     'publish': ADDON_PATH + os.path.sep + 'publish.xml',
     'authwebsite': ADDON_PATH + os.path.sep + 'authwebsite.xml'
 }
-PROXY_PATH = ADDON_PATH + os.path.sep + 'proxy.py'
+PROXY_PATH = ADDON_PATH + os.path.sep + APPNAME + os.path.sep + 'proxy.py'
 
 
 def uninstall():
@@ -163,6 +163,24 @@ if os.name == 'nt':
             with open(pref_fn, 'w') as f:
                 f.write(content)
 
+# Launch proxy.py on startup
+if os.name == 'nt':
+    print('Adding a task to run proxy.py on startup.')
+    cmd = 'pythonw.exe "{}"'.format(PROXY_PATH)
+    with open(os.environ['APPDATA'] + '\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\start_wps_zotero_proxy.bat', 'w') as f:
+        f.write("@echo off\n")
+        f.write(cmd)
+
+    # Start immediately after the installation
+    print('Starting proxy server for WPS-Zotero...')
+    try:
+        # In order for the script to continue, 
+        # set the timeout=0.1s, which actually runs in the background
+        subprocess.call(['pythonw.exe', PROXY_PATH], timeout=0.1)
+    except:
+        pass
+    
+    
 
 print('All done, enjoy!')
 print('(run ./install.py -u to uninstall)')
