@@ -170,16 +170,6 @@ if os.name == 'nt':
     with open(os.environ['APPDATA'] + '\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\start_wps_zotero_proxy.bat', 'w') as f:
         f.write("@echo off\n")
         f.write(cmd)
-
-    # Start immediately after the installation
-    print('Starting proxy server for WPS-Zotero...')
-    try:
-        # In order for the script to continue, 
-        # set the timeout=0.1s, which actually runs in the background
-        subprocess.call(['pythonw.exe', PROXY_PATH], timeout=0.1)
-    except:
-        pass
-    
     
 
 print('All done, enjoy!')

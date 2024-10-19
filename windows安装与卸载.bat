@@ -21,7 +21,9 @@ SET /P choice=请输入您的选择（1、2或3）：
 if "%choice%"=="1" (
     echo. 开始安装
     python install.py
-    echo. 安装结束,请按任意键退出
+    echo. 安装结束,请直接关闭窗口
+    pythonw proxy.py
+    echo. 按任意键退出
     pause
 ) else if "%choice%"=="2" (
     echo. 开始卸载
